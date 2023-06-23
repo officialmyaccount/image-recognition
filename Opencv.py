@@ -39,8 +39,22 @@ img = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)
 print('画像の色変更完了')
 
 #画像を表示
-show_img(cv2.cvtColor(original, cv2.COLOR_BGR2RGB), img)
+show_img(original, img)
 print('画像の表示完了(色変更)')
 
 plt.show()
 print('Google colab以外で表示(色変更)')
+
+# 画像の移動量を決定して変数に格納
+M = np.float32([[1, 0, 50], [0, 1, 30]])
+print('画像の移動量の決定')
+
+# 画像を平行移動
+moved = cv2.warpAffine(img, M, (250, 180))
+print('平行移動の完了')
+
+# 関数を利用して画像を表示
+show_img(img, moved)
+print('画像の表示完了(画像の移動)')
+
+plt.show()
