@@ -81,3 +81,31 @@ affine = cv2.warpAffine(img, M, (cols, rows))
 
 show_img(img, affine)
 plt.show()
+
+# 物体検出
+# 画像の読み込み
+face = cv2.imread('2983158.jpg')
+face2 = cv2.imread('dog-4390885_1280.jpg')
+
+face = cv2.resize(face, (1000, 600))
+face2 = cv2.resize(face, (1000, 600))
+
+# カスケード型分類機を読み込み
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
+eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
+
+# 顔を検出
+faces = face_cascade.detectMultiScale(face, 1.1, 3)
+
+# 検出した顔を黒い線で囲み、目を白い線で囲む
+for (x, y, w, h) in faces:
+    face = cv2.rectangle(face, (x, y), (x + w, y + h), (1, 1, 1), 2)
+    roi_color = face[y: y + h, x: x + w]
+    eyes = eye_cascade.detectMultiScale(roi_color)
+
+for (ex, ey, ew, eh) in eyes:
+    cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (255, 255, 255), 2)
+
+cv2.imshow('Face', face)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
