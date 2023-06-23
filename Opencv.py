@@ -71,3 +71,13 @@ rotated = cv2.warpAffine(img, M, (cols, rows))
 # 関数を利用して画像を表示
 show_img(img, rotated)
 plt.show()
+
+pts1 = np.float32([[40, 40], [400, 50], [10, 220]])
+pts2 = np.float32([[20, 100], [400, 50], [100, 270]])
+M = cv2.getAffineTransform(pts1, pts2)
+
+# 画像をせん断
+affine = cv2.warpAffine(img, M, (cols, rows))
+
+show_img(img, affine)
+plt.show()
