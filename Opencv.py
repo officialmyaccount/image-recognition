@@ -30,8 +30,8 @@ cv2.imshow('Resized Image', img0)
 print('画像の表示完了(resize)')
 
 # Google Colab以外でOpenCVを用いて表示する
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.waitKey(0) #0の場合、ボタンが押されるまでウィンドウを削除しない
+cv2.destroyAllWindows() # ウィンドウを閉じる
 print('Google colab以外で表示(resize)')
 
 # 画像の色を変更
@@ -57,4 +57,17 @@ print('平行移動の完了')
 show_img(img, moved)
 print('画像の表示完了(画像の移動)')
 
+plt.show()
+
+# 画像の行列、列数を変数に格納
+rows, cols = img.shape[:2]
+
+# 画像の回転量の設定
+M = cv2.getRotationMatrix2D((cols/2, rows/2), 60, 0.5) # 回転の中心、回転の角度、拡大縮小の度合い
+
+# 画像を開店
+rotated = cv2.warpAffine(img, M, (cols, rows))
+
+# 関数を利用して画像を表示
+show_img(img, rotated)
 plt.show()
