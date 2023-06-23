@@ -17,13 +17,30 @@ def show_img(Input, Output):
     plt.title('Output')
     plt.xticks([])
     plt.yticks([])
+print('show_img関数の定義完了')
 
 # 画像の読み込み
-original = cv2.imread('dog-4390885_1280.jpg', 0)
+original = cv2.imread('dog-4390885_1280.jpg')
 img0 = cv2.resize(original, (250, 180))
+print('画像の読み込み完了')
 
 # 画像を表示
 cv2.imshow('Original Image', original)
 cv2.imshow('Resized Image', img0)
+print('画像の表示完了(resize)')
+
+# Google Colab以外でOpenCVを用いて表示する
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+print('Google colab以外で表示(resize)')
+
+# 画像の色を変更
+img = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)
+print('画像の色変更完了')
+
+#画像を表示
+show_img(cv2.cvtColor(original, cv2.COLOR_BGR2RGB), img)
+print('画像の表示完了(色変更)')
+
+plt.show()
+print('Google colab以外で表示(色変更)')
